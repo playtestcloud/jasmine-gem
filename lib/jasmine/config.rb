@@ -65,7 +65,8 @@ module Jasmine
           include ::Sprockets::Helpers::RailsHelper
         end
         if Jasmine::Dependencies.rails4?
-          include ::Sprockets::Rails::Helper
+          # include ::Sprockets::Rails::Helper
+          require 'action_view/base'
           Rails.application.assets.context_class.assets_prefix = Rails.application.config.assets.prefix
         end
       end
@@ -127,7 +128,7 @@ module Jasmine
 
   def self.load_spec(spec_path)
     return if spec_path.nil?
-    Jasmine.configure do |c|  
+    Jasmine.configure do |c|
       c.spec_files = [spec_path]
     end
   end
